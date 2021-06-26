@@ -23,21 +23,20 @@ async def on_message(message):
 
     if message.author.bot:
         return
+
     if message.content == 'dog!c':
         if message.author.voice is None:
             await message.channel.send('ワーウ？(ボイスチャンネルがわからないみたい)')
             return
         
-        if messageChannel == None:
-            messageChannel = message.channel
-
-            voiceChannel = await VoiceChannel.connect(message.author.voice.channel)
-            await messageChannel.send('ワン！(TtSDogがやってきた！)')
-            return
-
-        else:
+        if messageChannel != None:
             await message.channel.send('ワウーン...(TtSDogは他のボイスチャンネルで働いてるみたい)')
             return
+
+        messageChannel = message.channel
+        voiceChannel = await VoiceChannel.connect(message.author.voice.channel)
+        await messageChannel.send('ワン！(TtSDogがやってきた！)')
+        return
     
     if message.content == 'dog!dc':
         if message.channel == messageChannel:
@@ -47,19 +46,23 @@ async def on_message(message):
             messageChannel = None
             return
         else:
-            await message.channel.send('ワウー？(TtSDogは他のテキストチャンネルで呼ばれたみたい)')
-            await message.channel.send(messageChannel.name)
+            await message.channel.send('ワウー？(TtSDogは他のところで呼ばれたみたい)')
+            await message.channel.send('呼ばれたチャンネル : ' + messageChannel.name)
             return
         
     if message.channel == messageChannel:
         play_voice(message.content)
     
-def text_to_ssml(text):
+def text_limitation(text):
     pattern = "https?://[\w/:%#\$&\?\(\)~\.=\+\-]+"
     if re.match(pattern, text):
-        text = "URL読めないって"
+        text = "ウー(URLは読めないみたい)"
     elif len(text) > 30:
         text = text[0:30]
+    return text
+
+def text_to_ssml(text):
+    text = text_limitation(text)
 
     escaped_lines = html.escape(text)
     ssml = "{}".format(
