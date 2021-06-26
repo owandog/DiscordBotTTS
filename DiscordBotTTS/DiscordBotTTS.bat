@@ -1,2 +1,0 @@
-py DiscordBotTTS.py
-pause

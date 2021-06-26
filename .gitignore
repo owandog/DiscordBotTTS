@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# BotToken‚ðŠÜ‚Þ
+submodule\token.py
