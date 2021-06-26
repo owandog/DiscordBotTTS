@@ -5,7 +5,7 @@ from discord.player import FFmpegPCMAudio
 from google.cloud import texttospeech
 import re
 
-Discord_TOKEN = 'TOKEN'
+Discord_TOKEN = "ODU4MTY3NTA3Njk2NDg0Mzcy.YNaMxQ.tIV9JUwdz-UUREkoVZDprvPdO0A"
 client = discord.Client()
 
 voiceChannel: VoiceChannel 
