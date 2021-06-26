@@ -129,5 +129,4 @@ dmypy.json
 .pyre/
 
 # BotToken��܂�
-submodule\token.py
 submodule/token.py
